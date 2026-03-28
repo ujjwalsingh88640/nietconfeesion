@@ -5,13 +5,7 @@ import {
 
 // 🚨 Your exact Firebase Keys
 const firebaseConfig = {
-    apiKey: "AIzaSyCkvc5FhBhKfUJL3ZbGi4ds3lVDWDduKcs",
-    authDomain: "campus1-87cdc.firebaseapp.com",
-    projectId: "campus1-87cdc",
-    storageBucket: "campus1-87cdc.firebasestorage.app",
-    messagingSenderId: "428407156924",
-    appId: "1:428407156924:web:814d7c832089b33e43e0b9",
-    measurementId: "G-MM1QZ3RNS1"
+    a
 };
 
 // Initialize Firebase
