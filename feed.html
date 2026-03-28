@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus Confession Wall — Live Feed</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+</head>
+<body class="feed-body">
+
+  <header class="feed-header">
+    <div class="header-noise"></div>
+    <div class="feed-header-inner">
+      <a href="index.html" class="back-link">← Back to Home</a>
+      <h1 class="feed-title">Campus Confession Wall</h1>
+      <p class="feed-subtitle">Anonymous thoughts from campus — unfiltered.</p>
+
+      <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+          <div class="post-count-badge">
+            <span id="live-count">0</span> confessions live
+          </div>
+          <button id="open-modal-btn" class="write-btn">✍️ Write Confession</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="feed-main">
+    <nav class="filter-bar" aria-label="Category filter">
+      <span class="filter-label">Filter by mood:</span>
+      <span class="cat-chip cat-love">❤️ Love</span>
+      <span class="cat-chip cat-funny">😂 Funny</span>
+      <span class="cat-chip cat-rant">😤 Rant</span>
+      <span class="cat-chip cat-study">📚 Study</span>
+      <span class="cat-chip cat-other">🤫 Other</span>
+    </nav>
+
+    <!-- FIREBASE WILL INJECT CARDS HERE -->
+    <div class="cards-grid" id="confessions-grid">
+        <p style="text-align: center; width: 100%; color: var(--text-muted);">Loading live confessions...</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-logo">📌 Campus Confession Wall</span>
+      <p class="footer-note">Styled with CSS · Powered by Firebase</p>
+      <p class="footer-credit">A student project · All confessions are anonymous.</p>
+    </div>
+  </footer>
+
+  <!-- SUBMISSION MODAL -->
+  <div id="post-modal" class="modal-overlay">
+    <div class="modal-content">
+       <h3>Whisper to the Wall</h3>
+       <form id="confession-form">
+           <select id="confession-category" required>
+               <option value="" disabled selected>Select a mood...</option>
+               <option value="Love">❤️ Love</option>
+               <option value="Funny">😂 Funny</option>
+               <option value="Rant">😤 Rant</option>
+               <option value="Study">📚 Study</option>
+               <option value="Other">🤫 Other</option>
+           </select>
+           <textarea id="confession-text" placeholder="Type your anonymous confession here... Let it out." required></textarea>
+           <div class="modal-actions">
+               <button type="button" id="close-modal-btn" class="cancel-btn">Cancel</button>
+               <button type="submit" id="submit-btn" class="cta-btn" style="font-size: 0.9rem; padding: 10px 20px;">Post Anonymously</button>
+           </div>
+       </form>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
