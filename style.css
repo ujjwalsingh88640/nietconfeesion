@@ -1,0 +1,662 @@
+/*
+  ============================================================
+  Campus Confession Wall — style.css
+  Shared stylesheet for index.html and XSLT-generated feed
+  Design: dark social-feed aesthetic · Syne + DM Sans fonts
+  ============================================================
+*/
+
+/* ──────────────────────────────────────────────────────────
+   1. CSS CUSTOM PROPERTIES (Design Tokens)
+────────────────────────────────────────────────────────── */
+:root {
+  /* Core palette */
+  --bg:          #0d0d0f;
+  --bg-card:     #18181c;
+  --bg-card-alt: #1e1e24;
+  --border:      rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.15);
+
+  /* Text */
+  --text-primary:   #f0efe8;
+  --text-secondary: #9c9b96;
+  --text-muted:     #5a5a60;
+
+  /* Accent */
+  --accent:       #e8c547;        /* campus gold */
+  --accent-glow:  rgba(232,197,71,0.18);
+
+  /* Category colours */
+  --love-bg:    rgba(255, 80, 120, 0.12);
+  --love-text:  #ff5078;
+  --love-border: rgba(255, 80, 120, 0.3);
+
+  --funny-bg:   rgba(255, 200, 40, 0.12);
+  --funny-text: #ffc828;
+  --funny-border: rgba(255, 200, 40, 0.3);
+
+  --rant-bg:    rgba(255, 80, 50, 0.12);
+  --rant-text:  #ff5032;
+  --rant-border: rgba(255, 80, 50, 0.3);
+
+  --study-bg:   rgba(60, 150, 255, 0.12);
+  --study-text: #3c96ff;
+  --study-border: rgba(60, 150, 255, 0.3);
+
+  --other-bg:   rgba(160, 160, 170, 0.12);
+  --other-text: #a0a0aa;
+  --other-border: rgba(160,160,170, 0.3);
+
+  /* Typography */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Spacing & shape */
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-xl:  32px;
+  --shadow-card: 0 4px 32px rgba(0,0,0,0.4);
+  --shadow-hover: 0 8px 48px rgba(0,0,0,0.55);
+}
+
+/* ──────────────────────────────────────────────────────────
+   2. RESET & BASE
+────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ──────────────────────────────────────────────────────────
+   3. SHARED HEADER
+────────────────────────────────────────────────────────── */
+.site-header,
+.feed-header {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #141418 0%, #1a1a22 60%, #0f0f13 100%);
+  border-bottom: 1px solid var(--border-strong);
+  text-align: center;
+  padding: 80px 24px 72px;
+}
+
+/* Subtle noise texture overlay */
+.header-noise {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(232,197,71,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, rgba(60,150,255,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.header-inner,
+.feed-header-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ──────────────────────────────────────────────────────────
+   4. HOMEPAGE — HEADER
+────────────────────────────────────────────────────────── */
+.header-badge {
+  display: inline-block;
+  background: rgba(232,197,71,0.1);
+  border: 1px solid rgba(232,197,71,0.25);
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.site-title em {
+  font-style: normal;
+  color: var(--accent);
+  display: inline-block;
+}
+
+.site-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 460px;
+  margin: 0 auto 40px;
+  font-style: italic;
+}
+
+/* ──────────────────────────────────────────────────────────
+   5. CTA BUTTON
+────────────────────────────────────────────────────────── */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #0d0d0f;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(232,197,71,0.3);
+  text-decoration: none;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 36px rgba(232,197,71,0.45);
+}
+
+.cta-btn--large {
+  font-size: 1.15rem;
+  padding: 18px 36px;
+}
+
+.btn-arrow {
+  font-size: 1.2em;
+  transition: transform 0.2s;
+}
+
+.cta-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ──────────────────────────────────────────────────────────
+   6. FLOATING CATEGORY TAGS (homepage header decoration)
+────────────────────────────────────────────────────────── */
+.float-tags {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.ftag {
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--border-strong);
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.03);
+  animation: floatTag 3s ease-in-out infinite;
+}
+
+.ftag:nth-child(2) { animation-delay: 0.4s; }
+.ftag:nth-child(3) { animation-delay: 0.8s; }
+.ftag:nth-child(4) { animation-delay: 1.2s; }
+.ftag:nth-child(5) { animation-delay: 1.6s; }
+
+@keyframes floatTag {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+
+.ftag--love  { color: var(--love-text);  border-color: var(--love-border); }
+.ftag--funny { color: var(--funny-text); border-color: var(--funny-border); }
+.ftag--rant  { color: var(--rant-text);  border-color: var(--rant-border); }
+.ftag--study { color: var(--study-text); border-color: var(--study-border); }
+.ftag--other { color: var(--other-text); border-color: var(--other-border); }
+
+/* ──────────────────────────────────────────────────────────
+   7. HOMEPAGE — MAIN LAYOUT
+────────────────────────────────────────────────────────── */
+.home-body .home-main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+/* Section labels (eyebrow text) */
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.section-body {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 540px;
+  line-height: 1.8;
+}
+
+/* ──────────────────────────────────────────────────────────
+   8. FEATURE CARDS
+────────────────────────────────────────────────────────── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.feature-card {
+  border-radius: var(--radius-md);
+  padding: 28px 22px;
+  border: 1px solid var(--border);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.feature-card--dark {
+  background: var(--bg-card);
+}
+
+.feature-card--accent {
+  background: rgba(232,197,71,0.07);
+  border-color: rgba(232,197,71,0.2);
+}
+
+.feature-card--light {
+  background: rgba(255,80,120,0.07);
+  border-color: rgba(255,80,120,0.2);
+}
+
+.feature-card--outline {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.feature-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.feature-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* ──────────────────────────────────────────────────────────
+   9. CATEGORY CHIPS (shared — homepage & feed filter)
+────────────────────────────────────────────────────────── */
+.cat-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.cat-chip {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 100px;
+  cursor: default;
+  border: 1px solid;
+  transition: transform 0.15s;
+}
+
+.cat-chip:hover { transform: scale(1.04); }
+
+.cat-love  { background: var(--love-bg);  color: var(--love-text);  border-color: var(--love-border);  }
+.cat-funny { background: var(--funny-bg); color: var(--funny-text); border-color: var(--funny-border); }
+.cat-rant  { background: var(--rant-bg);  color: var(--rant-text);  border-color: var(--rant-border);  }
+.cat-study { background: var(--study-bg); color: var(--study-text); border-color: var(--study-border); }
+.cat-other { background: var(--other-bg); color: var(--other-text); border-color: var(--other-border); }
+
+/* ──────────────────────────────────────────────────────────
+   10. CTA SECTION (homepage bottom)
+────────────────────────────────────────────────────────── */
+.cta-section {
+  text-align: center;
+  padding: 48px 24px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+}
+
+.cta-tagline {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  font-style: italic;
+}
+
+/* ──────────────────────────────────────────────────────────
+   11. FEED PAGE — HEADER
+────────────────────────────────────────────────────────── */
+.feed-body .feed-header {
+  padding: 60px 24px 56px;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.feed-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.feed-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+
+.post-count-badge {
+  display: inline-block;
+  background: var(--accent-glow);
+  border: 1px solid rgba(232,197,71,0.25);
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 7px 20px;
+  border-radius: 100px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   12. FEED PAGE — FILTER BAR
+────────────────────────────────────────────────────────── */
+.feed-main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   13. CONFESSION CARDS GRID
+────────────────────────────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Base card styles */
+.confession-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 26px 22px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.confession-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.confession-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Category-specific card accents */
+.card--love   { border-color: var(--love-border);  background: linear-gradient(160deg, rgba(255,80,120,0.06) 0%, var(--bg-card) 50%); }
+.card--love::before   { background: var(--love-text); }
+
+.card--funny  { border-color: var(--funny-border); background: linear-gradient(160deg, rgba(255,200,40,0.06) 0%, var(--bg-card) 50%); }
+.card--funny::before  { background: var(--funny-text); }
+
+.card--rant   { border-color: var(--rant-border);  background: linear-gradient(160deg, rgba(255,80,50,0.06) 0%, var(--bg-card) 50%); }
+.card--rant::before   { background: var(--rant-text); }
+
+.card--study  { border-color: var(--study-border); background: linear-gradient(160deg, rgba(60,150,255,0.06) 0%, var(--bg-card) 50%); }
+.card--study::before  { background: var(--study-text); }
+
+.card--other  { border-color: var(--other-border); background: var(--bg-card); }
+.card--other::before  { background: var(--other-text); }
+
+/* Post number watermark */
+.card-number {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Card top: category tag area */
+.card-top {
+  display: flex;
+  align-items: center;
+}
+
+/* Category tag pill */
+.category-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1px solid;
+}
+
+.tag--love  { background: var(--love-bg);  color: var(--love-text);  border-color: var(--love-border);  }
+.tag--funny { background: var(--funny-bg); color: var(--funny-text); border-color: var(--funny-border); }
+.tag--rant  { background: var(--rant-bg);  color: var(--rant-text);  border-color: var(--rant-border);  }
+.tag--study { background: var(--study-bg); color: var(--study-text); border-color: var(--study-border); }
+.tag--other { background: var(--other-bg); color: var(--other-text); border-color: var(--other-border); }
+
+/* Confession text */
+.card-text {
+  font-size: 0.98rem;
+  color: var(--text-primary);
+  line-height: 1.75;
+  font-weight: 300;
+  flex: 1;
+}
+
+/* Card footer: likes + anon */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.likes-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.heart-icon {
+  font-size: 1rem;
+}
+
+.anon-tag {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ──────────────────────────────────────────────────────────
+   14. SHARED FOOTER
+────────────────────────────────────────────────────────── */
+.site-footer {
+  background: #0a0a0c;
+  border-top: 1px solid var(--border);
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.footer-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.footer-credit {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* ──────────────────────────────────────────────────────────
+   15. RESPONSIVE
+────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .site-header, .feed-header {
+    padding: 56px 20px 52px;
+  }
+
+  .home-main, .feed-main {
+    padding: 40px 16px 60px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}

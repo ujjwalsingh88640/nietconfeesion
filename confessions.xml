@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ============================================================
+  Campus Confession Wall — confessions.xml
+  Data file: stores all confession posts
+  Linked to confessions.xsl for automatic browser transformation
+  ============================================================
+-->
+
+<!-- Link to XSLT stylesheet so browsers auto-transform this file -->
+<?xml-stylesheet type="text/xsl" href="confessions.xsl"?>
+
+<confessions>
+
+  <!-- ── Post 1 ── -->
+  <post id="1">
+    <category>Funny</category>
+    <text>Exam ke pehle raat ko sab topper ban jaate hain. Subah wahi 'bhai 2 ghante soye hain' wali story. 😂</text>
+    <likes>142</likes>
+  </post>
+
+  <!-- ── Post 2 ── -->
+  <post id="2">
+    <category>Love</category>
+    <text>I think I like someone from CSE-B. We've never spoken properly but every time they explain something in class, I forget what I came to college for. ❤️</text>
+    <likes>98</likes>
+  </post>
+
+  <!-- ── Post 3 ── -->
+  <post id="3">
+    <category>Rant</category>
+    <text>Sir asked 'any doubts?' and when someone actually asked a doubt, he said 'you should have studied this at home.' WHY DID YOU ASK THEN?! 😤</text>
+    <likes>213</likes>
+  </post>
+
+  <!-- ── Post 4 ── -->
+  <post id="4">
+    <category>Study</category>
+    <text>Discovered that writing notes in different colored pens doesn't make me study better — it just makes me feel like I did something productive for 3 hours. 📚</text>
+    <likes>77</likes>
+  </post>
+
+  <!-- ── Post 5 ── -->
+  <post id="5">
+    <category>Funny</category>
+    <text>Our college WiFi is so slow, I submitted my assignment yesterday and it will probably reach the portal next semester. 🐌</text>
+    <likes>189</likes>
+  </post>
+
+  <!-- ── Post 6 ── -->
+  <post id="6">
+    <category>Love</category>
+    <text>We studied together for internals for two weeks. On result day, she texted 'thank you study buddy!' I got 18/30. She got 29/30. I think she's the one. 💀❤️</text>
+    <likes>321</likes>
+  </post>
+
+  <!-- ── Post 7 ── -->
+  <post id="7">
+    <category>Other</category>
+    <text>The campus cat knows everyone's name. She meows at the canteen uncle at 1pm sharp every day. She has a better schedule than me and honestly more discipline. 🐱</text>
+    <likes>267</likes>
+  </post>
+
+  <!-- ── Post 8 ── -->
+  <post id="8">
+    <category>Rant</category>
+    <text>Group project: I did the report, the presentation, the code, and the research. They showed up on presentation day and said 'we' the whole time. THERE IS NO WE. 😤</text>
+    <likes>445</likes>
+  </post>
+
+  <!-- ── Post 9 ── -->
+  <post id="9">
+    <category>Study</category>
+    <text>I've read the same paragraph 11 times. I understood it the first time. I just keep reading it hoping something will change. It won't. I need help. 📖</text>
+    <likes>156</likes>
+  </post>
+
+  <!-- ── Post 10 ── -->
+  <post id="10">
+    <category>Funny</category>
+    <text>Attendance is 73%. Minimum required: 75%. Number of days left: 4. Number of holidays upcoming: 2. I'm doing the mathematics of survival, not integration. 📉</text>
+    <likes>503</likes>
+  </post>
+
+  <!-- ── Post 11 ── -->
+  <post id="11">
+    <category>Love</category>
+    <text>They once said 'you're pretty smart' in a group chat meant for someone else. I screenshot it. It's my lockscreen. That was 8 months ago. I'm fine. ❤️</text>
+    <likes>388</likes>
+  </post>
+
+  <!-- ── Post 12 ── -->
+  <post id="12">
+    <category>Other</category>
+    <text>To whoever returns library books on time: you are the unsung hero of this institution. The rest of you — we see you. The fine counter sees you too. 👀</text>
+    <likes>92</likes>
+  </post>
+
+</confessions>
